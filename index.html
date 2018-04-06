@@ -40,7 +40,7 @@
           $("#staticImage").click(function(){
             console.log("clicked");
             $("#staticImage").empty();
-            $("#staticImage").append("<video id='myvideo' src='profile_own.mp4' autoplay poster='profile_own.png'>");
+            $("#staticImage").append("<video id='myvideo' src='profile_own.mp4' poster='profile_own.png'>");
             $('video').on('ended',function(){
               $("#staticImage").empty();
               $("#staticImage").append("<img src='profile_own.png'>");
