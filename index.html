@@ -2,7 +2,6 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <title>Endorse Button Animation</title>
     <style media="screen">
       * {
@@ -19,84 +18,78 @@
       body {
         background-color: #F7F6F9;
         width: 100vw;
-        max-width: 680px;
-        margin: auto;
+        /* max-width: 680px; */
+        margin: 0;
       }
-      video, img {
-        width: 100%;
+
+      img {
+        width: 100vw;
+        display: block;
+        margin: 0 auto;
+        padding: 0;
+        float: left;
       }
+
+      svg {
+        width: 100vw;
+        display: block;
+        margin: 0 auto;
+        padding: 0;
+        float: left;
+      }
+
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="greensock/TimelineMax.min.js"></script>
+    <script type="text/javascript" src="greensock/TweenMax.min.js"></script>
+    <script type="text/javascript" src="greensock/TweenLite.min.js"></script>
   </head>
   <body>
       <div id="staticImage">
         <img src="profile_own.png">
-        <!-- <video src="profile_own.mp4" autoplay poster="profile_own.png"> -->
-        <!-- <video id="video" autobuffer> <source src="profile_own.mp4"></video> -->
-        <!-- </video> -->
       </div>
-
+      <script type="text/javascript" src="lottie.js"></script>
       <script type="text/javascript">
         $(document).ready(function(){
-          // var video = document.getElementById('video');
-          // video.addEventListener('click',function(){
-          //   video.play();
-          // },false);
+
+
           $("#staticImage").click(function(){
-            console.log("clicked with autoplay");
             $("#staticImage").empty();
-            $("#staticImage").append("<video id='myvideo' src='profile_own.mp4' autoplay poster='profile_own.png'>");
-            $('video').on('ended',function(){
-              $("#staticImage").empty();
-              $("#staticImage").append("<img src='profile_own.png'>");
-            });
-          });
+            animate();
+          })
+
+          function animate(){
+            console.log("in animate function");
+
+              var startFrame = 0;
+              var endFrame =  330;
+              var animation_time = 6;
+              // var animation_ease = "Power1.easeInOut";
+
+
+            var animation = lottie.loadAnimation({
+              container: document.getElementById('staticImage'),
+              renderer: 'svg',
+              loop: false,
+              autoplay: true,
+              path: 'data.json'
+            })
+            var tl = new TimelineMax();
+            tl.to({frame:startFrame}, animation_time, {
+              frame: endFrame,
+              // ease: animation_ease,
+              onStart: function(){
+                console.log("animation: ", animation.totalFrames-1);
+              },
+              onUpdate: function(){
+                animation.goToAndStop(Math.round(this.target.frame), true);
+              },
+              onComplete: function(){
+                console.log("animation complete");
+              }
+            })
+          }
         })
-
-
-        // TweenLite.to($("#follow_button"), 1, {left:"500px", ease:Power4.easeOut});
-        // $("#staticImage").click(function(){
-        //   $("#staticImage").empty();
-        //   var animation = bodymovin.loadAnimation({
-        //     container: document.getElementById('staticImage'),
-        //     renderer: 'svg',
-        //     loop: false,
-        //     autoplay: false,
-        //     path: 'data.json'
-        //   })
-        //   animation.play()
-        // });
-        // function animate(){
-        //   $("#staticImage").empty();
-        //     var startFrame = 0;
-        //     var endFrame =  300;
-        //     var animation_time = 1.5;
-        //     var animation_ease = "Power1.easeInOut";
-        //
-        //   var animation = bodymovin.loadAnimation({
-        //     container: document.getElementById('staticImage'),
-        //     renderer: 'svg',
-        //     loop: false,
-        //     autoplay: false,
-        //     path: 'data.json'
-        //   })
-        //   var tl = new TimelineMax();
-        //   tl.to({frame:startFrame}, animation_time, {
-        //     frame: endFrame,
-        //     ease: animation_ease,
-        //     onStart: function(){
-        //       console.log("animation: ", animation.totalFrames-1);
-        //     },
-        //     onUpdate: function(){
-        //       console.log(Math.round(this.target.frame));
-        //       animation.goToAndStop(Math.round(this.target.frame), true);
-        //     },
-        //     onComplete: function(){
-        //       console.log("animation complete");
-        //       // animation.goToAndStop(1, true);
-        //     }
-        //   })
-        // }
       </script>
   </body>
 </html>
