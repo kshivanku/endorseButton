@@ -43,7 +43,7 @@
           //   video.play();
           // },false);
           $("#staticImage").click(function(){
-            console.log("clicked");
+            console.log("clicked with autoplay");
             $("#staticImage").empty();
             $("#staticImage").append("<video id='myvideo' src='profile_own.mp4' autoplay poster='profile_own.png'>");
             $('video').on('ended',function(){
