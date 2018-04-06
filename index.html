@@ -30,22 +30,27 @@
   </head>
   <body>
       <div id="staticImage">
-        <img src="profile_own.png">
+        <!-- <img src="profile_own.png"> -->
         <!-- <video src="profile_own.mp4" autoplay poster="profile_own.png"> -->
-        </video>
+        <video id="video" autobuffer> <source src="profile_own.mp4"></video>
+        <!-- </video> -->
       </div>
 
       <script type="text/javascript">
         $(document).ready(function(){
-          $("#staticImage").click(function(){
-            console.log("clicked");
-            $("#staticImage").empty();
-            $("#staticImage").append("<video id='myvideo' src='profile_own.mp4' poster='profile_own.png'>");
-            $('video').on('ended',function(){
-              $("#staticImage").empty();
-              $("#staticImage").append("<img src='profile_own.png'>");
-            });
-          });
+          var video = document.getElementById('video');
+          video.addEventListener('click',function(){
+            video.play();
+          },false);
+          // $("#staticImage").click(function(){
+          //   console.log("clicked");
+          //   $("#staticImage").empty();
+          //   $("#staticImage").append("<video id='myvideo' src='profile_own.mp4' poster='profile_own.png'>");
+          //   $('video').on('ended',function(){
+          //     $("#staticImage").empty();
+          //     $("#staticImage").append("<img src='profile_own.png'>");
+          //   });
+          // });
         })
 
 
